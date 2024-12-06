@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="🌮TACO: Learning Multi-modal Action Models with Synthetic Chains-of-Thought-and-Action">
+  <meta name="keywords" content="taco, multi-model model, agent, synthetic data">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TACO</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link rel="icon" href="./static/images/taco.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+
+  <!-- <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bulma.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script> -->
+  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
+  <script src="./static/js/question_card.js"></script>
+
+  <script src="./static/js/leaderboard_testmini.js"></script>  
+  <script src="./data/results/output_folders.js" defer></script>
+  <script src="./data/results/model_scores.js" defer></script>
+
+  <script src="./visualizer/data/data_public.js" defer></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://mnms-project.github.io">
+            m&ms
+          </a>
+          <a class="navbar-item" href="https://github.com/RAIVNLab/CREPE">
+            CREPE
+          </a>
+          <a class="navbar-item" href="https://github.com/RAIVNLab/sugar-crepe">
+            SugarCREPE
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title is-bold">
+              <img src="./static/images/taco.png" style="width:1em;vertical-align: middle" alt="Logo">
+              <span  style="vertical-align: middle">TACO</span>
+            </h1>
+
+            <h1 class="subtitle is-3 publication-title">
+              Learning Multi-modal Action Models </br> with Synthetic Chains-of-Thought-and-Action 
+            </h1>
+             
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://zixianma.github.io">Zixian Ma</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://jianguoz.github.io">Jianguo Zhang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sites.google.com/view/zhiwei-jim">Zhiwei Liu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://jieyuz2.github.io">Jieyu Zhang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.juntaotan.com">Juntao Tan</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://azshue.github.io/">Manli Shu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.niebles.net/">Juan Carlos Niebles</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.shelbyh.ai/">Shelby Heinecke</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://huan-december.github.io/index.html">Huan Wang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://cmxiong.com/">Caiming Xiong</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.ranjaykrishna.com/index.html">Ranjay Krishna</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/silvio-savarese-97b76114/">Silvio Savarese</a><sup>2</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Washington,</span>
+            <span class="author-block"><sup>2</sup>Salesforce Research</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2403.11085"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/SalesforceAIResearch/TACO"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- HF Links. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/zixianma/mnms"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <p style="font-size:18px">🤗</p>
+                  </span>
+                  <span>Model and Dataset</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-body">
+      <img src="./static/images/teaser.png">
+      <p class="subtitle">
+        Figure 1. TACO outputs a Chain-of-Thought-and-Action (CoTA) and answers challenging questions based on the thoughts and action outputs, whereas existing multi-modal
+        large language models can only output direct answers and often fail to reach the correct answers.
+      </p>    
+      <!-- <video autoplay muted loop height="100%">
+        <source src="./static/videos/mnms_video_hd.mp4"
+                type="video/mp4">
+      </video> -->
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p class="subtitle">
+            We present TACO, a family of multi-modal large action models designed to improve performance on such complex, multi-step and multi-modal tasks. 
+            During inference, TACO produces chains-of-thought-and-action (CoTA), executes intermediate steps by invoking external tools such as OCR, 
+            depth estimation and calculator, then integrates both the thoughts and action outputs to produce coherent responses.
+            To train TACO, we create a large dataset of 1M+ synthetic CoTA traces generated with GPT-4o and Python programs. 
+            We then experiment with various data filtering and mixing techniques and obtain a final subset of 293K high-quality CoTA examples.  
+            This dataset enables TACO to learn complex reasoning and action paths, surpassing existing models trained on instruct tuning data with 
+            only direct answers. Our model TACO outperforms the instruction-tuned baseline across 8 benchmarks, achieving a 3.6% 
+            improvement on average, with gains up to 15% in MMVet tasks involving OCR, mathematical reasoning and spatial reasoning. 
+            Training on high-quality CoTA traces sets a new standard for complex multi-modal reasoning, highlighting the need for structured, 
+            multi-step instruction tuning in advancing open-source mutli-modal models' capabilities.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    
+    
+  </div>
+</section>
+
+<!-- DATASET SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <!-- <h1 class="title is-1 mathvista"><img src="static/images/mathvista.png" style="width:1.0em;vertical-align: middle" alt="Logo"/>MathVista Dataset</h1> -->
+    <h1 class="title is-1">
+      <span style="vertical-align: middle">TACO Successes and Failures</span>
+    </h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered m-3">
+      <div class="column is-full has-text-centered content">
+        <!-- <h2 class="title is-3">More Examples</h2> -->
+        <!-- <p>We present additional examples of TACO success and failure below:</p> -->
+          <div id="results-carousel" class="carousel results-carousel" >
+            <div class="box m-5 carousel-box">
+              <div class="content has-text-centered carousel-content">
+                <img src="static/images/additional_examples.png" />
+                <p> Successful examples</p>
+              </div>
+            </div>
+            <div class="box m-5 carousel-box">
+              <div class="content has-text-centered carousel-content">
+                <img src="static/images/additional_examples_2.png" />
+                <p> Successful examples</p>
+              </div>
+            </div>
+            <div class="box m-5 carousel-box">
+              <div class="content has-text-centered carousel-content">
+                <img src="static/images/failure_examples.png"/>
+                <p> Failure examples</p>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DATA SECTION -->
+ <!-- DATASET SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <!-- <h1 class="title is-1 mathvista"><img src="static/images/mathvista.png" style="width:1.0em;vertical-align: middle" alt="Logo"/>MathVista Dataset</h1> -->
+    <h1 class="title is-1">
+      <!-- <img src="static/images/mnms_green_single.png" style="width:1em;vertical-align: middle" alt="Logo" /> -->
+      <span style="vertical-align: middle">CoTA Dataset</span>
+    </h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered mt-3">
+      <div class="column has-text-centered content">
+        <!-- <img src="static/videos/data_gen.gif"/> -->
+        <h2 class="title is-3">CoTA Data Generation</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/data_gen.png" alt="dataset generation method">
+      <p class="subtitle has-text-centered">
+        Figure 2. We illustrate our model-based data generation (top) and programmatic generation (bottom) pipelines.
+      </p>
+      <p class="subtitle has-text-justified">
+        In model-based generation, we take existing image and QA pairs as inputs and prompt GPT-4o to <b>Generate</b> either a chain-of-thought-and-action (CoTA) or chain-of-thought (CoT) 
+        <i>without</i> actions to answer the questions. Then, we <b>Verify</b> that the chains lead to correct 
+        final answers and <b>Parse</b> successfully; if not, we convert them into the direct answer (Direct)
+        format with groundtruth answers. 
+      </p> 
+        <p class="subtitle has-text-justified">
+        In programmatic generation, we first <b>Annotate</b> images with 
+        human labelers or models, and then use the dense annotations to fill in manually written templates and 
+        <b>Generate</b> QA and the corresponding CoTA with Python programs.
+      </p>
+
+      <h2 class="title is-3 has-text-centered mt-6">CoTA Data Distribution</h2>
+         
+          <div class="content">
+            <img src="static/images/cota_cot_dist.png" alt="data distribution"/>
+            <p class="subtitle">
+              Figure 3. We visualize the frequency of data formats (i.e. CoTA-pos/neg, and CoT-pos/neg) in the original
+               GPT-4-generated data and in our final training data (i.e. CoTA, CoT, or Direct) in each dataset 
+               across all data sources. We also highlight the Action-useless (i.e. datasets where % of CoT-pos - CoTA-pos > 
+               10 or % of CoTA-neg - CoTA-pos > 10) vs. Action-useful datasets.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- EXPERIMENTS SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1">
+      <!-- <img src="static/images/mnms_green_single.png" style="width:1em;vertical-align: middle" alt="Logo" /> -->
+      <span style="vertical-align: middle">Experimental Results</span>
+    </h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered mt-3">
+      <div class="column content">
+        
+        <!-- <h2 class="title is-3">Overview</h2> -->
+        <div class="content">
+          <p class="subtitle">
+            We perform extensive experiments with 3 open-source
+            multi-modal models and 9 data recipes on 8 benchmarks
+            to study the effectiveness of CoTA data compared to
+            instruction-tuning data with only direct answers, and to in-
+            vestigate whether data filtering and programmatic data can
+            lead to further performance gains. We highlight four main takeaways below:
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="columns is-centered mt-3">
+      <div class="column  content">
+        <!-- <h2 class="title is-3"></h2> -->
+          <div class="content">
+            <img src="static/images/table1.png" alt="data distribution"/>
+            <p class="subtitle has-text-centered">
+              Table 1. CoTA Inference Before vs. After Fine-tuning
+            </p>
+            <p class="subtitle">
+             While GPT-4o performs well with either a direct answer (Direct) or chain-of-
+              thought-and-action (CoTA) prompt, open-source multi-modal models lag behind and fail to generate CoTA with few-shot prompting.
+            </p>
+              <h3 class=""> <b>Takeaway 1: </b>
+               We show that fine-tuning with CoTA data elicits multi-modal language models' reasoning and action calling abilities and significantly boosts their performance, which few-shot prompting fails to achieve.
+              </h3>
+          </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered mt-3">
+      <div class="column content">
+        <!-- <h2 class="title is-3"></h2> -->
+          <div class="content">
+            <img src="static/images/table2.png" alt="results of best cota data recipe"/>
+            <p class="subtitle has-text-centered">
+              Table 2. Best CoTA Recipe
+            </p>
+              <h3 class=""> <b>Takeaway 2: </b>
+                Our best CoTA data recipe results in a strong multi-modal action model TACO that consistently beats
+                instruction-tuned baselines by 1-4% on average across
+                8 benchmarks, with significant gains of up to 15% on MMVet. 
+          </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered mt-3">
+      <div class="column content">
+        <!-- <h2 class="title is-3"></h2> -->
+          <div class="content">
+            <img src="static/images/table3.png" alt="model-generated data ablations"/>
+            <p class="subtitle has-text-centered">
+              Table 3. Model-generated Data Ablations
+            </p>
+              <h3 class=""> <b>Takeaway 3: </b>
+                Quality matters more than quantity: the smallest dataset with only
+                CoTA examples results in better average performance and higher gains compared to larger datasets with a mix of CoTA, CoT and/or Direct
+                examples; and filtering out Action-useless datasets also leads to performance gains.
+          </div>
+      </div>
+    </div>
+    <div class="columns is-centered mt-3">
+      <div class="column content">
+        <!-- <h2 class="title is-3"></h2> -->
+          <div class="content">
+            <img src="static/images/table4.png" alt="model + program data mixtures"/>
+            <p class="subtitle has-text-centered">
+              Table 4. Model-generated + Program-generated CoTA Mixtures
+            </p>
+              <h3 class=""> <b>Takeaway 4: </b>
+                Adding programmatically generated data can lead to further gains on some benchmarks but brings no additional gains to the average performance.
+          </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container content">
+    <h2 class="title">Citation</h2>
+    <pre><code>@article{ma2024taco,
+      title={TACO: Learning Multi-modal Action Models with Synthetic Chains-of-Thought-and-Action}, 
+      author={Zixian Ma and Jianguo Zhang and Zhiwei Liu and Jieyu Zhang and Juntao Tan and Manli Shu and Juan Carlos Niebles and Shelby Heinecke and Huan Wang and Caiming Xiong and Ranjay Krishna and Silvio Savarese},
+      year={2024},
+      journal={arXiv preprint},
+    }</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <!-- <div class="container"> -->
+  <div class="content has-text-centered">
+  </div>
+  <div class="columns is-centered">
+    <div class="column is-8">
+      <div class="content">
+        <p>
+          This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a href="https://mathvista.github.io/">MathVista</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</footer>
+
+</body>
+</html>
