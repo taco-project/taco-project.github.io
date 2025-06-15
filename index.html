@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="🌮TACO: Learning Multi-modal Action Models with Synthetic Chains-of-Thought-and-Action">
-  <meta name="keywords" content="taco, multi-model model, agent, synthetic data">
+        content="LATTE: Learning to Think with Vision Specialists">
+  <meta name="keywords" content="multi-modal model, agent, synthetic data">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TACO</title>
+  <title>LATTE</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -63,7 +63,7 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
+      <a class="navbar-item" href="https://zixianma.github.io/">
       <span class="icon">
           <i class="fas fa-home"></i>
       </span>
@@ -96,14 +96,13 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title is-bold">
-              <img src="./static/images/taco.png" style="width:1em;vertical-align: middle" alt="Logo">
-              <span  style="vertical-align: middle">TACO</span>
+            <h1 class="subtitle is-1 publication-title is-bold">
+              <img src="./static/images/latte.png" style="width:1em;vertical-align: middle" alt="Logo">
+              <span  style="vertical-align: middle">LATTE </br>LeArning to Think wiTh Vision SpEcialists</span>
             </h1>
-
-            <h1 class="subtitle is-3 publication-title">
+            <!-- <h1 class="subtitle is-3 publication-title">
               Learning Multi-modal Action Models </br> with Synthetic Chains-of-Thought-and-Action 
-            </h1>
+            </h1> -->
              
           <div class="is-size-5 publication-authors">
             <span class="author-block">
@@ -220,9 +219,10 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <!-- <h2 class=" title is-3">How does it work?</h2> -->
-      <video controls="" height="100%" poster="./static/videos/video_thumbnail.png">
+       <img src="./static/images/framework.png" alt="teaser image" class="is-fullwidth">
+      <!-- <video controls="" height="100%" poster="./static/videos/video_thumbnail.png">
         <source src="./static/videos/taco_video.mp4#t=7.0" fetchpriority="high" type="video/mp4">
-      </video>
+      </video> -->
     </div>
   </div>
 </section>
@@ -235,16 +235,9 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p class="subtitle">
-            We present TACO, a family of multi-modal large action models designed to improve performance on such complex, multi-step and multi-modal tasks. 
-            During inference, TACO produces chains-of-thought-and-action (CoTA), executes intermediate steps by invoking external tools such as OCR, 
-            depth estimation and calculator, then integrates both the thoughts and action outputs to produce coherent responses.
-            To train TACO, we create a large dataset of 1M+ synthetic CoTA traces generated with GPT-4o and Python programs. 
-            We then experiment with various data filtering and mixing techniques and obtain a final subset of 293K high-quality CoTA examples.  
-            This dataset enables TACO to learn complex reasoning and action paths, surpassing existing models trained on instruct tuning data with 
-            only direct answers. Our model TACO outperforms the instruction-tuned baseline across 8 benchmarks, achieving a 3.6% 
-            improvement on average, with gains up to 15% in MMVet tasks involving OCR, mathematical reasoning and spatial reasoning. 
-            Training on high-quality CoTA traces sets a new standard for complex multi-modal reasoning, highlighting the need for structured, 
-            multi-step instruction tuning in advancing open-source mutli-modal models' capabilities.
+           While open-source vision-language models perform well on simple question-answering, they
+            still struggle with complex questions that require both perceptual and reasoning capabilities. 
+            We propose LATTE, a family of vision-language models that have LeArned to Think wiTh vision spEcialists. By offloading perception to state-of-the-art vision models, our approach enables vision-language models to focus solely on reasoning over high-quality per-ceptual information. To train LATTE, we synthesize and filter a large dataset of 273K multi-modal reasoning traces over perceptual outputs of vision specialists. LATTE trained on this data achieves significant gains over baselines across 6 benchmarks covering both perception and reasoning abilities. Ablation studies reveal that the effectiveness of multi-modal reasoning traces depends on the data sources, formats, and quality of thoughts.
           </p>
         </div>
       </div>
@@ -258,8 +251,9 @@
     <div class="hero-body">
       <img src="./static/images/teaser.png">
       <p class="subtitle">
-        Figure 1. TACO outputs a Chain-of-Thought-and-Action (CoTA) and answers challenging questions based on the thoughts and action outputs, whereas existing multi-modal
-        large language models can only output direct answers and often fail to reach the correct answers.
+        Figure 1. <b>Example outputs of LATTE vs. SoTA multi-modal large language models.</b> Our LATTE model is able to answer challenging
+visual questions by reasoning over perceptual information output by vision specialists. It does so by generating a reasoning trace over
+vision specialists' outputs and producing a final answer based on its reasoning.
       </p>    
       <!-- <video autoplay muted loop height="100%">
         <source src="./static/videos/mnms_video_hd.mp4"
@@ -316,7 +310,7 @@
     <!-- <h1 class="title is-1 mathvista"><img src="static/images/mathvista.png" style="width:1.0em;vertical-align: middle" alt="Logo"/>MathVista Dataset</h1> -->
     <h1 class="title is-1">
       <!-- <img src="static/images/mnms_green_single.png" style="width:1em;vertical-align: middle" alt="Logo" /> -->
-      <span style="vertical-align: middle">CoTA Dataset</span>
+      <span style="vertical-align: middle">LATTE Traces</span>
     </h1>
   </div>
 </section>
@@ -326,33 +320,33 @@
     <div class="columns is-centered mt-3">
       <div class="column is-four-fifths has-text-centered content">
         <!-- <img src="static/videos/data_gen.gif"/> -->
-        <h2 class="title is-3">CoTA Data Generation</h2>
+        <h2 class="title is-3">LATTE-traces Generation</h2>
         <div class="content has-text-justified">
           <img src="./static/images/data_gen.png" alt="dataset generation method">
       <p class="subtitle has-text-centered">
-        Figure 2. We illustrate our model-based data generation (top) and programmatic generation (bottom) pipelines.
+        Figure 2. <b>Data Generation.</b>
       </p>
       <p class="subtitle has-text-justified">
-        In model-based generation, we take existing image and QA pairs as inputs and prompt GPT-4o to <b>Generate</b> either a chain-of-thought-and-action (CoTA) or chain-of-thought (CoT) 
-        <i>without</i> actions to answer the questions. Then, we <b>Verify</b> that the chains lead to correct 
-        final answers and <b>Parse</b> successfully; if not, we convert them into the direct answer (Direct)
-        format with groundtruth answers. 
+        We illustrate our model-based data generation (top) and programmatic generation (bottom) pipelines. In
+        model-based generation, we take existing image and QA pairs as inputs and prompt a large language model (i.e. GPT-4o) to generate
+        either a LATTE-trace or chain-of-thought (CoT) to answer the questions. Then, we verify that the chains lead to correct final answers and
+        parse successfully; if not, we convert them into the direct answer (Direct) format with groundtruth answers. 
       </p> 
         <p class="subtitle has-text-justified">
-        In programmatic generation, we first <b>Annotate</b> images with 
-        human labelers or models, and then use the dense annotations to fill in manually written templates and 
-        <b>Generate</b> QA and the corresponding CoTA with Python programs.
+          In programmatic generation,
+        we first annotate images with human labelers and models, and then use the dense annotations to fill in manually written templates and
+        generate QA and the corresponding LATTE-trace with Python programs.
       </p>
 
-      <h2 class="title is-3 has-text-centered mt-6">CoTA Data Distribution</h2>
+      <h2 class="title is-3 has-text-centered mt-6">Data Distribution</h2>
          
           <div class="content">
             <img src="static/images/cota_cot_dist.png" alt="data distribution"/>
             <p class="subtitle">
-              Figure 3. We visualize the frequency of data formats (i.e. CoTA-pos/neg, and CoT-pos/neg) in the original
-               GPT-4-generated data and in our final training data (i.e. CoTA, CoT, or Direct) in each dataset 
-               across all data sources. We also highlight the Action-useless (i.e. datasets where % of CoT-pos - CoTA-pos > 
-               10 or % of CoTA-neg - CoTA-pos > 10) vs. Action-useful datasets.
+              Figure 3. <b>Distribution of data formats and sources.</b> We visualize the frequency of data formats (i.e. LATTE-pos/neg, and CoT-pos/neg,
+pos = correct final answers, neg = incorrect) in the original GPT-4-generated data and in our training data (i.e. LATTE-trace, CoT, or
+Direct) across all data sources. We also highlight the LATTE-useless (i.e. % of CoT-pos - LATTE-pos > 10 or % of LATTE-neg -
+LATTE-pos > 10) vs. LATTE-useful datasets.
             </p>
           </div>
         </div>
@@ -377,12 +371,7 @@
         <!-- <h2 class="title is-3">Overview</h2> -->
         <div class="content">
           <p class="subtitle">
-            We perform extensive experiments with 3 open-source
-            multi-modal models and 9 data recipes on 8 benchmarks
-            to study the effectiveness of CoTA data compared to
-            instruction-tuning data with only direct answers, and to in-
-            vestigate whether data filtering and programmatic data can
-            lead to further performance gains. We highlight three main takeaways below:
+            We perform extensive experiments with small multi-modal models and 9 data recipes on 6 benchmarks to study the effectiveness of LATTE-traces in enabling models to reason with vision specialists on diverse vision-language tasks. 
           </p>
         </div>
       </div>
@@ -402,13 +391,17 @@
               thought-and-action (CoTA) prompt, open-source multi-modal models lag behind and fail to generate CoTA with few-shot prompting.
             </p> -->
             <h3 class=""> <b>Takeaway 1: </b>
-              Fine-tuning with CoTA data elicits multi-modal language models' reasoning and action calling abilities and significantly boosts their performance (i.e. CoTA finetuned vs. CoTA in Figure 4); 
-            <img src="static/images/taco_vs_baselines.png" alt="data distribution"/>
+              LATTE leads to substantial gains compared to vanilla instruction-tuning on both perception and reasoning benchmarks, whereas other distillation baselines result in smaller gains or even degradation on some perception tasks. 
+            <img src="static/images/latte_vs_distillation.png" alt="latte vs vanilla it results"/>
             <p class="subtitle has-text-centered">
-              Figure 4. Model's average accuracy before and after being finetuned with Direct Answers vs. CoTA data  
+              Table 1. <b>LATTE vs. Baselines on Perception and Reasoning Benchmarks.</b> 
+            </p>
+            <img src="static/images/scaling_results.png" alt="results of best cota data recipe"/>
+            <p class="subtitle has-text-centered">
+              Figure 1. <b>Performance of LATTE vs. Baselines across Training Data Scales. </b>
             </p>
                 <h3 class=""> <b>Takeaway 2: </b>
-                Compared to the instruction-tuned baseline trained with only direct answers, TACO improves by 1-4% on average across all benchmarks (i.e. CoTA finetuned vs. Direct finetuned in Figure 4).
+                Our method beats the vanilla instruction-tuning baseline on average across all benchmarks regardless of the base model and checkpoint, with significant gains of 10-16% on MMVet.
                </h3>
           </div>
       </div>
@@ -418,15 +411,15 @@
     <div class="columns is-centered mt-3">
       <div class="column is-four-fifths  content">
           <div class="content">
-            <img src="static/images/table2.png" alt="results of best cota data recipe"/>
+            <img src="static/images/latte_vs_vanilla_it.png" alt="results of best cota data recipe"/>
             <p class="subtitle has-text-centered">
-              Table 1. Models' accuracy on all benchmarks after being finetuned with the best data recipe
+              Table 2. <b>LATTE vs. Vanilla IT with Different Models.</b>
             </p>
-           <img src="static/images/taco_vs_baselines_mmvet.png" alt="data distribution"/>
+           <img src="static/images/error_analysis.png" alt="data distribution"/>
             <p class="subtitle has-text-centered">
-              Figure 5. Model's accuracy on MMVet after being finetuned with Direct Answers vs. CoTA data  
+              Figure 2. <b>Qualitative analysis.</b> Example outputs of VPD, LLaVA-CoT vs. LATTE on BLINK.
             </p>
-              <h3 class=""> <b>Takeaway 3: </b> Takeaway 2 holds regardless of model backbones and checkpoints (Table 1), with significant gains of up to 20% on MMVet (Figure 5). 
+              <h3 class=""> <b>Takeaway 3: </b> LATTE performs better in fine-grained perception tasks such as the counting questions in BLINK, while VPD and LLaVA-CoT tend to hallucinate and make perceptual errors.
           </div>
       </div>
     </div>
